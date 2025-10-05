@@ -205,8 +205,7 @@ export default function Home() {
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 backdrop-blur-sm/0">
           <div className="flex items-center gap-3">
             <Icon name="logo" className="h-6 w-6 text-amber-400" />
-            <div className="h-3 w-48 rounded-sm bg-gradient-to-r from-amber-500 to-orange-500" />
-            <span className="ml-3 text-lg font-semibold tracking-wide">BhaktQueue</span>
+            <span className="ml-1 text-xl font-semibold tracking-wide" style={{ fontFamily: 'Poppins, system-ui, sans-serif' }}>BhaktQueue</span>
           </div>
           <nav className="flex items-center gap-8">
             <a className="inline-flex items-center gap-2 hover:opacity-90" href="#/">
