@@ -206,6 +206,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Icon name="logo" className="h-6 w-6 text-amber-400" />
             <div className="h-3 w-48 rounded-sm bg-gradient-to-r from-amber-500 to-orange-500" />
+            <span className="ml-3 text-lg font-semibold tracking-wide">BhaktQueue</span>
           </div>
           <nav className="flex items-center gap-8">
             <a className="inline-flex items-center gap-2 hover:opacity-90" href="#/">
