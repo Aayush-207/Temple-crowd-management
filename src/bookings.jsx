@@ -64,6 +64,18 @@ export default function Bookings() {
                   <div className="text-xs text-neutral-500">Time Slot</div>
                   <div className="mt-1 font-medium">{b.slot}</div>
                 </div>
+                <div className="rounded-xl bg-neutral-50 p-4 ring-1 ring-neutral-200">
+                  <div className="text-xs text-neutral-500">Name</div>
+                  <div className="mt-1 font-medium">{b.userName || '-'}</div>
+                </div>
+                <div className="rounded-xl bg-neutral-50 p-4 ring-1 ring-neutral-200">
+                  <div className="text-xs text-neutral-500">Phone</div>
+                  <div className="mt-1 font-medium">{b.phone || '-'}</div>
+                </div>
+                <div className="rounded-xl bg-neutral-50 p-4 ring-1 ring-neutral-200 md:col-span-2">
+                  <div className="text-xs text-neutral-500">Assistance</div>
+                  <div className="mt-1 font-medium">{b.assistanceLabel || 'No assistance (₹0)'}</div>
+                </div>
               </div>
               <div className="mt-4 flex items-center justify-end gap-3">
                 <button

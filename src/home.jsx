@@ -340,6 +340,10 @@ function BookingForm({ onConfirm, temple }) {
   const [current, setCurrent] = useState(new Date(now.getFullYear(), now.getMonth(), 1))
   const [selected, setSelected] = useState(new Date(now.getFullYear(), now.getMonth(), now.getDate()))
   const [slot, setSlot] = useState('')
+  const [showDetails, setShowDetails] = useState(false)
+  const [userName, setUserName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [assistance, setAssistance] = useState('none')
 
   const year = current.getFullYear()
   const month = current.getMonth()
@@ -361,6 +365,13 @@ function BookingForm({ onConfirm, temple }) {
     { label: '12:00 PM - 2:00 PM', full: false },
     { label: '4:00 PM - 6:00 PM', full: false },
     { label: '6:00 PM - 8:00 PM', full: true }
+  ]
+
+  const assistanceOptions = [
+    { value: 'none', label: 'No assistance (₹0)', cost: 0 },
+    { value: 'wheelchair', label: 'Wheelchair (₹200)', cost: 200 },
+    { value: 'walker', label: 'Walker (₹100)', cost: 100 },
+    { value: 'assistant', label: 'Attendant Assistance (₹300)', cost: 300 }
   ]
 
   return (
@@ -392,33 +403,84 @@ function BookingForm({ onConfirm, temple }) {
       </div>
 
       <div className="flex flex-col justify-between gap-4">
-        <div>
-          <div className="text-sm font-semibold">Select Time Slot</div>
-          {!selected && (
-            <div className="mt-3 text-sm text-neutral-500">Please select a date first.</div>
-          )}
-          {selected && (
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {allSlots.map(s => (
-                <button
-                  key={s.label}
-                  disabled={s.full}
-                  onClick={() => setSlot(s.label)}
-                  className={`rounded-xl border px-4 py-2 text-sm ${s.full ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' : slot===s.label ? 'border-transparent bg-gradient-to-r from-amber-500 to-orange-600 text-white' : 'hover:bg-neutral-50'}`}
-                >
-                  {s.label}
-                </button>
-              ))}
+        {!showDetails && (
+          <>
+            <div>
+              <div className="text-sm font-semibold">Select Time Slot</div>
+              {!selected && (
+                <div className="mt-3 text-sm text-neutral-500">Please select a date first.</div>
+              )}
+              {selected && (
+                <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {allSlots.map(s => (
+                    <button
+                      key={s.label}
+                      disabled={s.full}
+                      onClick={() => setSlot(s.label)}
+                      className={`rounded-xl border px-4 py-2 text-sm ${s.full ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' : slot===s.label ? 'border-transparent bg-gradient-to-r from-amber-500 to-orange-600 text-white' : 'hover:bg-neutral-50'}`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <button
-          disabled={!slot}
-          onClick={() => onConfirm({ id: Date.now(), date: dateLabel, slot, temple })}
-          className={`h-11 rounded-xl font-semibold shadow-sm ${slot ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
-        >
-          Confirm Booking
-        </button>
+            <button
+              disabled={!slot}
+              onClick={() => setShowDetails(true)}
+              className={`h-11 rounded-xl font-semibold shadow-sm ${slot ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
+            >
+              Confirm Booking
+            </button>
+          </>
+        )}
+
+        {showDetails && (
+          <div className="grid gap-4">
+            <div className="text-sm font-semibold">Your Details</div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="block text-xs font-medium text-neutral-600">Full Name</label>
+                <input value={userName} onChange={(e)=>setUserName(e.target.value)} className="mt-1 w-full rounded-xl border px-3 py-2 outline-none" placeholder="Enter your name" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-neutral-600">Phone Number</label>
+                <input value={phone} onChange={(e)=>setPhone(e.target.value)} className="mt-1 w-full rounded-xl border px-3 py-2 outline-none" placeholder="e.g. 9876543210" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-neutral-600">Assistance</label>
+              <select value={assistance} onChange={(e)=>setAssistance(e.target.value)} className="mt-1 w-full rounded-xl border px-3 py-2 outline-none">
+                {assistanceOptions.map(o => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button className="rounded-xl border px-4 py-2 text-sm" onClick={()=>setShowDetails(false)}>Back</button>
+              <button
+                disabled={!userName || !phone}
+                onClick={() => {
+                  const selectedOption = assistanceOptions.find(a => a.value === assistance) || assistanceOptions[0]
+                  onConfirm({
+                    id: Date.now(),
+                    date: dateLabel,
+                    slot,
+                    temple,
+                    userName,
+                    phone,
+                    assistance: selectedOption.value,
+                    assistanceLabel: selectedOption.label,
+                    assistanceCost: selectedOption.cost
+                  })
+                }}
+                className={`rounded-xl px-5 py-2.5 text-sm font-semibold shadow-sm ${userName && phone ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
+              >
+                Confirm & Save
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
