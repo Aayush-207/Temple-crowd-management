@@ -1,5 +1,5 @@
 # Temple Crowd Management System  
-[BhaktQueue](https://bhaktqueue.netlify.app/)  
+Demo - [BhaktQueue](https://bhaktqueue.netlify.app/)  
 
 ## 🧭 Project Overview  
 In many temples, crowd management becomes a major operational challenge — long queues, unpredictable crowd influx, & physical discomfort for devotees.  
