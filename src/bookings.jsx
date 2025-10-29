@@ -88,10 +88,10 @@ export default function Bookings() {
                 >
                   Cancel Booking
                 </button>
-                <button
-                  onClick={() => setDetail(b)}
-                  className="rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 px-4 py-2 text-sm font-semibold text-white"
-                >
+              <button
+                onClick={() => setDetail(b)}
+                className="rounded-xl bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+              >
                   View Details
                 </button>
               </div>

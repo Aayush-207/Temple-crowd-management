@@ -97,7 +97,7 @@ function TempleCard({ temple }) {
           </div>
         </div>
         <p className="mt-2 line-clamp-2 text-neutral-600 text-sm">{temple.description}</p>
-        <button onClick={temple.onBook} className="mt-4 w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 px-4 py-2.5 text-white font-semibold shadow-sm hover:from-amber-600 hover:to-orange-700">
+        <button onClick={temple.onBook} className="mt-4 w-full rounded-xl bg-amber-600 px-4 py-2.5 text-white font-semibold shadow-sm hover:bg-amber-700">
           View & Book
         </button>
       </div>
@@ -413,12 +413,12 @@ function BookingForm({ onConfirm, temple }) {
               {selected && (
                 <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {allSlots.map(s => (
-                    <button
-                      key={s.label}
-                      disabled={s.full}
-                      onClick={() => setSlot(s.label)}
-                      className={`rounded-xl border px-4 py-2 text-sm ${s.full ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' : slot===s.label ? 'border-transparent bg-gradient-to-r from-amber-500 to-orange-600 text-white' : 'hover:bg-neutral-50'}`}
-                    >
+              <button
+                key={s.label}
+                disabled={s.full}
+                onClick={() => setSlot(s.label)}
+                className={`rounded-xl border px-4 py-2 text-sm ${s.full ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' : slot===s.label ? 'border-transparent bg-amber-600 text-white' : 'hover:bg-neutral-50'}`}
+              >
                       {s.label}
                     </button>
                   ))}
@@ -428,7 +428,7 @@ function BookingForm({ onConfirm, temple }) {
             <button
               disabled={!slot}
               onClick={() => setShowDetails(true)}
-              className={`h-11 rounded-xl font-semibold shadow-sm ${slot ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
+              className={`h-11 rounded-xl font-semibold shadow-sm ${slot ? 'bg-amber-600 text-white hover:bg-amber-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
             >
               Confirm Booking
             </button>
@@ -474,7 +474,7 @@ function BookingForm({ onConfirm, temple }) {
                     assistanceCost: selectedOption.cost
                   })
                 }}
-                className={`rounded-xl px-5 py-2.5 text-sm font-semibold shadow-sm ${userName && phone ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
+                className={`rounded-xl px-5 py-2.5 text-sm font-semibold shadow-sm ${userName && phone ? 'bg-amber-600 text-white hover:bg-amber-700' : 'bg-neutral-200 text-neutral-500 cursor-not-allowed'}`}
               >
                 Confirm & Save
               </button>

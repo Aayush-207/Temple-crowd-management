@@ -33,14 +33,14 @@ export default function Auth() {
               <label className="block text-sm font-medium">Password</label>
               <input type="password" className="mt-1 w-full rounded-xl border px-3 py-2 outline-none" required />
             </div>
-            <button className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 py-2.5 font-semibold text-white">{mode === 'login' ? 'Sign In' : 'Create Account'}</button>
+            <button className="w-full rounded-xl bg-amber-600 py-2.5 font-semibold text-white hover:bg-amber-700">{mode === 'login' ? 'Sign In' : 'Create Account'}</button>
           </form>
 
           <div className="mt-6 text-center text-sm">
             {mode === 'login' ? (
-              <span>Don&apos;t have an account? <button className="text-amber-600" onClick={()=>setMode('signup')}>Sign up</button></span>
+              <span>Don&apos;t have an account? <button className="text-neutral-700 hover:underline underline-offset-2" onClick={()=>setMode('signup')}>Sign up</button></span>
             ) : (
-              <span>Already have an account? <button className="text-amber-600" onClick={()=>setMode('login')}>Log in</button></span>
+              <span>Already have an account? <button className="text-neutral-700 hover:underline underline-offset-2" onClick={()=>setMode('login')}>Log in</button></span>
             )}
           </div>
         </div>
